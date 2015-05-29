@@ -1,30 +1,30 @@
-/*var boot = require('../app').boot,
+var boot = require('../app').boot,
   shutdown = require('../app').shutdown,
   port = require('../app').port,
   superagent = require('superagent'),
+  assert = require("assert"),
   expect = require('expect.js');
 
-describe('server', function () {
-  before(function () {
+var C = require('../cash.js'); // our cash module
+
+describe('server', function() {
+  before(function() {
     boot();
   });
-  describe('homepage', function(){
-    it('should respond to GET',function(done){
+  describe('homepage', function() {
+    it('should respond to GET', function(done) {
       superagent
-        .get('http://localhost:'+port)
-        .end(function(res){
-          expect(res.status).to.equal(200);
-          done()
-      })
-    })
+        .get('http://localhost:' + port)
+        .end(function(err, res) {
+            expect(res.status).to.equal(200);
+            done();
+        });
+    });
   });
-  after(function () {
+  after(function() {
     shutdown();
   });
-});*/
-
-var assert = require("assert"); // node.js core module
-var C = require('../cash.js'); // our module
+});
 
 describe('Array', function() {
   describe('#indexOf()', function() {
