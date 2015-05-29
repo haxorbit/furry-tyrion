@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  #wrapper
+    #logo
+      a(href='/')
+        img(src='/images/logo.jpg' width='100')
+    #display
+      #login
+        form(method='post')
+          | Enter your name if you want to be a ninja
+          div
+            input(type='text', name='username')
+            input(type='submit', value='Log In')
+          input(type="hidden", name="_csrf", value="#{csrf}")
+
+    include footer
