@@ -16,8 +16,8 @@ describe('server', function() {
       superagent
         .get('http://localhost:' + port)
         .end(function(err, res) {
-            expect(res.status).to.equal(200);
-            done();
+          expect(res.status).to.equal(200);
+          done();
         });
     });
   });

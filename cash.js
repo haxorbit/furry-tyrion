@@ -9,8 +9,8 @@ C.getChange = function(totalPayable, cashPaid) { // enough to satisfy the test
   for (var i = 0; i < length; i++) { // loop through array of notes & coins:
     var coin = C.coins[i];
 
-    if (remaining/coin >= 1) { // check coin fits into the remaining amount
-      var times = Math.floor(remaining/coin); // no partial coins
+    if (remaining / coin >= 1) { // check coin fits into the remaining amount
+      var times = Math.floor(remaining / coin); // no partial coins
 
       for (var j = 0; j < times; j++) { // add coin to change x times
         change.push(coin);
