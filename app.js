@@ -1,38 +1,3 @@
-/*var express = require('express');
-var app = express();
-
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'jade');
-
-// respond with "Hello World!" on the homepage
-app.get('/', function (req, res) {
-  res.render('index', {title: 'Yo, Fren', message: 'How yer doing?'});
-});
-
-// accept POST request on the homepage
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-
-// accept PUT request at /user
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-
-// accept DELETE request at /user
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-
-var server = app.listen(3000, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-
-});*/
-
 var express = require('express'),
   path = require('path'),
   favicon = require('serve-favicon'),
@@ -64,21 +29,6 @@ app.use(csrf());
 app.use(methodOverride('_method'));
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(__dirname + '/public'));
-
-/*app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
-  app.use(app.router);
-  app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
-});*/
 
 /// Error handlers
 
