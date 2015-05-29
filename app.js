@@ -6,7 +6,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   session = require('express-session'),
-  csrf = require('csurf');
+  csrf = require('csurf'),
+  http = require('http');
 
 var store = store = require('./routes/store');
 var app = express();
@@ -17,7 +18,9 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
 app.use(session({
   key: '92A7-9AC',
@@ -35,23 +38,23 @@ app.use(express.static(__dirname + '/public'));
 // Development error handler
 // Will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // Production error handler
 // No stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 app.get('/', store.home);
@@ -63,14 +66,27 @@ app.get('/item/:id', store.item);
 // show general pages
 app.get('/page', store.page);
 app.get('/logout', function(req, res) {
-    // delete the session variable
-    delete req.session.username;
-    // redirect user to homepage
-    res.redirect('/');
+  // delete the session variable
+  delete req.session.username;
+  // redirect user to homepage
+  res.redirect('/');
 });
 
-var server = app.listen(app.get('port'), function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('App serving at http://%s:%s', host, port);
-});
+var server = http.createServer(app);
+var boot = function() {
+  server.listen(app.get('port'), function() {
+    console.log('Express server listening on port %s', app.get('port'));
+  });
+};
+var shutdown = function() {
+  server.close();
+}
+
+if (require.main === module) {
+  boot();
+} else {
+  console.info('Running app as a module');
+  exports.boot = boot;
+  exports.shutdown = shutdown;
+  exports.port = app.get('port');
+}
