@@ -29,7 +29,7 @@ exports.home_post_handler = function(req, res) {
 exports.items = function(req, res) {
     // don't let nameless people view the items, redirect them back to the homepage
     if (typeof req.session.username == 'undefined') res.redirect('/');
-    else res.render('items', { title: 'Ninja Store - Items', username: req.session.username, items:items });
+    else res.render('items', { title: 'Items', username: req.session.username, items:items });
 };
 
 // handler for displaying individual items
@@ -39,7 +39,7 @@ exports.item = function(req, res) {
     else {
         var name = items[req.params.id].name;
         var price = items[req.params.id].price;
-        res.render('item', { title: 'Ninja Store - ' + name, username: req.session.username, name:name, price:price });
+        res.render('item', { title: 'Item - ' + name, username: req.session.username, name:name, price:price });
     }
 };
 
@@ -50,5 +50,5 @@ exports.page = function(req, res) {
         about: 'Ninja Store sells the coolest ninja stuff in the world. Anyone shopping here is cool.',
         contact: 'You can contact us at <address><strong>Ninja Store</strong>,<br>1, World Ninja Headquarters,<br>Ninja Avenue,<br>NIN80B7-JP,<br>Nihongo.</address>'
     };
-    res.render('page', { title: 'Ninja Store - ' + name, username: req.session.username, content:contents[name] });
+    res.render('page', { title: 'ihazcheeseburger - ' + name, username: req.session.username, content:contents[name] });
 };
