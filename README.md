@@ -1,6 +1,8 @@
 Furry Tyrion
 ============
 
+[![Build Status](https://travis-ci.org/haxorbit/furry-tyrion.svg?branch=master)](https://travis-ci.org/haxorbit/furry-tyrion)
+
 **NOTE**: Requires Express 4.x / Not compatible with Express 3.x
 
 -----------
